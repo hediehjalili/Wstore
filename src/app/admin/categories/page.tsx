@@ -1,26 +1,23 @@
 "use client";
-import React, { useState } from "react";
-import AdminLayout from "../layout";
-import { Typography, Button, Box, Grid, TextField } from "@mui/material";
 
-// Define the Category interface
+import React, { useState } from "react";
+import { Typography, Button, Box, Grid, TextField } from "@mui/material";
+import AdminLayout from "../layout"; // دقت کن این باید client باشه یا بدون هوک‌های client
+
 interface Category {
   id: number;
   name: string;
 }
 
 export default function CategoriesPage() {
-  // State for categories
   const [categories, setCategories] = useState<Category[]>([
     { id: 1, name: "دسته ۱" },
     { id: 2, name: "دسته ۲" },
     { id: 3, name: "دسته ۳" },
   ]);
 
-  // State for the new category name
   const [newCategory, setNewCategory] = useState<string>("");
 
-  // Handle adding a new category
   const handleAddCategory = (): void => {
     if (newCategory.trim() === "") return;
 
@@ -30,10 +27,9 @@ export default function CategoriesPage() {
     };
 
     setCategories((prev) => [...prev, newCategoryObj]);
-    setNewCategory(""); // Clear the input
+    setNewCategory("");
   };
 
-  // Handle deleting a category
   const handleDeleteCategory = (id: number): void => {
     setCategories((prev) => prev.filter((category) => category.id !== id));
   };
@@ -44,7 +40,6 @@ export default function CategoriesPage() {
         مدیریت دسته‌بندی‌ها
       </Typography>
 
-      {/* Form to Add Category */}
       <Box sx={{ mb: 4 }}>
         <TextField
           label="نام دسته‌بندی"
@@ -69,7 +64,6 @@ export default function CategoriesPage() {
         </Button>
       </Box>
 
-      {/* List of Categories */}
       <Grid container spacing={2}>
         {categories.map((category) => (
           <Grid item xs={12} sm={6} md={4} key={category.id}>
